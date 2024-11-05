@@ -24,9 +24,7 @@ const serverAcronyms = {
 module.exports = {
     name: 'messageCreate',
     async execute(message) {
-        // Ignore if the message is a reply (handled by crossServerReply.js)
-        if (message.reference) return;
-
+       
         // Check if the message is in a designated source channel
         if (![channelID1, channelID2, channelID3].includes(message.channel.id)) return;
         if (!message.member) return;
@@ -87,7 +85,7 @@ module.exports = {
         }
 
         // Save original and relayed message IDs to the database
-        console.log(`Adding mapping to database for message ID ${message.id}:`, mappings);
+        // console.log(`Adding mapping to database for message ID ${message.id}:`, mappings);
         await db.addMessageMapping(message.id, mappings);
     },
 };
