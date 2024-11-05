@@ -1,10 +1,23 @@
 const { WebhookClient } = require('discord.js');
-const { serverID1, serverID2, channelID1, channelID2, channelWHID2, channelWHTK2 } = require('../config.json');
+const { 
+    serverID1, 
+    serverID2, 
+    serverID3, 
+    channelID1, 
+    channelID2, 
+    channelID3,    
+    channelWHID1, 
+    channelWHTK1, 
+    channelWHID2, 
+    channelWHTK2, 
+    channelWHID3, 
+    channelWHTK3 
+} = require('../config.json');
 
 const serverAcronyms = {
     [serverID1]: "[NGI]",
     [serverID2]: "[VIRT]",
-    // Add more as needed
+    [serverID3]: "[12BG]"
 };
 
 module.exports = {
@@ -14,21 +27,42 @@ module.exports = {
      * @param {Message} message - The message object from Discord.js
      */
     async execute(message) {
-        if (message.channel.id !== channelID1) return;
+        // Check if the message was sent in a designated source channel
+        if (![channelID1, channelID2, channelID3].includes(message.channel.id)) return;
+
+        // Ensure message.member is defined (not null)
+        if (!message.member) {
+            //console.error('Message member is null. Unable to relay message.');
+            return;
+        }
 
         const serverAcronym = serverAcronyms[message.guild.id] || 'UNK';
-
-        // Construct the webhook username with the server acronym and user's display name
         const webhookUsername = `${serverAcronym} ${message.member.displayName}`;
+        const avatarURL = message.member.displayAvatarURL({ dynamic: true });
 
-        // Initialize the webhook client
-        const webhookClient = new WebhookClient({ id: channelWHID2, token: channelWHTK2 });
+        // Webhooks for target channels
+        const targetWebhooks = [];
 
-        // Send the message through the webhook with the modified username
-        await webhookClient.send({
-            content: message.content, // Send only the message content
-            username: webhookUsername, // Username now includes the server acronym
-            avatarURL: message.member.displayAvatarURL({ dynamic: true }), // Use the user's server-specific profile picture
-        });
+        if (message.channel.id === channelID1) {
+            targetWebhooks.push({ id: channelWHID2, token: channelWHTK2 });
+            targetWebhooks.push({ id: channelWHID3, token: channelWHTK3 });
+        } else if (message.channel.id === channelID2) {
+            targetWebhooks.push({ id: channelWHID1, token: channelWHTK1 });
+            targetWebhooks.push({ id: channelWHID3, token: channelWHTK3 });
+        } else if (message.channel.id === channelID3) {
+            targetWebhooks.push({ id: channelWHID1, token: channelWHTK1 });
+            targetWebhooks.push({ id: channelWHID2, token: channelWHTK2 });
+        }
+
+        // Relay the message to each target webhook
+        for (const webhookData of targetWebhooks) {
+            const webhookClient = new WebhookClient(webhookData);
+
+            await webhookClient.send({
+                content: message.content,
+                username: webhookUsername,
+                avatarURL: avatarURL
+            });
+        }
     },
 };

@@ -9,3 +9,5 @@ Work in progress.  Don't expect much, I'm an unskilled monkey slapping a typewri
 Copy demo-config.json to config.json - edit the guts
 
 use node index.js to start the bot.
+
+If you found this useful, buy me a coffee!  https://ko-fi.com/yestergearpc
