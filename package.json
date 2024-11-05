@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/zombienerd/NightfallBot#readme",
   "dependencies": {
-    "discord.js": "^14.16.3"
+    "discord.js": "^14.16.3",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "eslint": "^9.14.0"
