@@ -1,5 +1,19 @@
 {
 	"token": "Put your Bot Token Here",
-    "clientId": "Put your Bot APPID here",
-	"guildId": "Put your Discord Server ID here (for dev purposes)"
+    "clientId": "Put your Bot App ID here",
+	"serverID1": "Server 1 ID",
+    "serverID2": "Server 2 ID",
+    "serverID3": "Server 3 ID",
+    "serverID4": "Server 4 ID",
+    "serverID5": "Server 5 ID",
+    "channelID1": "Server 1 Channel 1 ID",
+    "channelWHID1": "Server 1 Channel 1 Webhook ID",
+    "channelWHTK1": "Server 1 Channel 1 Webhook Token",
+    "channelID2": "Server 2 Channel 2 ID",
+    "channelWHID2": "Server 2 Channel 2 Webhook ID",
+    "channelWHTK2": "Server 2 Channel 2 Webhook Token",
+    "channelID3": "",
+    "channelID4": "",
+    "channelID5": ""
+
 }
