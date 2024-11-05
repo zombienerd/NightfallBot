@@ -1,0 +1,28 @@
+{
+  "name": "nightfallbot",
+  "version": "0.0.1",
+  "description": "Cross-server Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zombienerd/NightfallBot.git"
+  },
+  "keywords": [
+    "Discord"
+  ],
+  "author": "YesterGearPC (Adam Brisebois)",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/zombienerd/NightfallBot/issues"
+  },
+  "homepage": "https://github.com/zombienerd/NightfallBot#readme",
+  "dependencies": {
+    "discord.js": "^14.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.14.0"
+  }
+}
