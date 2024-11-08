@@ -6,9 +6,11 @@ const {
     channelID1,
     channelID2,
     channelID3,
+    channelID4,
     channelID6,
     channelID7,
-    channelID8
+    channelID8,
+    channelID9,
 } = require('../config.json');
 
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
         const sourceChannelId = reaction.message.channel.id;
 
         // Only proceed if the reaction was added in one of the designated source channels
-        if (![channelID1, channelID2, channelID3, channelID6, channelID7, channelID8].includes(sourceChannelId)) return;
+        if (![channelID1, channelID2, channelID3, channelID4, channelID6, channelID7, channelID8, channelID9].includes(sourceChannelId)) return;
 
         // Find the original message ID using the relayed message's ID
         const originalMessageId = await getOriginalMessageId(reaction.message.id);
@@ -43,9 +45,11 @@ module.exports = {
             { id: channelID1, messageId: mapping.channel1MessageId },
             { id: channelID2, messageId: mapping.channel2MessageId },
             { id: channelID3, messageId: mapping.channel3MessageId },
+            { id: channelID4, messageId: mapping.channel4MessageId },
             { id: channelID6, messageId: mapping.channel6MessageId },
             { id: channelID7, messageId: mapping.channel7MessageId },
             { id: channelID8, messageId: mapping.channel8MessageId },
+            { id: channelID9, messageId: mapping.channel9MessageId },
         ];
 
         // Format the emoji correctly for custom and standard cases
@@ -82,9 +86,11 @@ async function getOriginalMessageId(relayedMessageId) {
             mapping.channel1MessageId === relayedMessageId ||
             mapping.channel2MessageId === relayedMessageId ||
             mapping.channel3MessageId === relayedMessageId ||
+            mapping.channel4MessageId === relayedMessageId ||
             mapping.channel6MessageId === relayedMessageId ||
             mapping.channel7MessageId === relayedMessageId ||
-            mapping.channel8MessageId === relayedMessageId
+            mapping.channel8MessageId === relayedMessageId ||
+            mapping.channel9MessageId === relayedMessageId
         ) {
             return mapping.sourceMessageId;
         }
