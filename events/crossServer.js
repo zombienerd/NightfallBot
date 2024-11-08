@@ -174,6 +174,6 @@ module.exports = {
         // Save original and relayed message IDs to the database
         // console.log(`Adding mapping to database for message ID ${message.id}:`, mappings);
         await db.addMessageMapping(message.id, mappings);
-        console.log(`Mapping added for source message ID ${message.id}:`, mappings);
+        // console.log(`Mapping added for source message ID ${message.id}:`, mappings);
     },
 };
