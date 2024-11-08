@@ -96,7 +96,6 @@ module.exports = {
             targetWebhooks.push({ id: channelWHID1, token: channelWHTK1 });
             targetWebhooks.push({ id: channelWHID2, token: channelWHTK2 });
             targetWebhooks.push({ id: channelWHID3, token: channelWHTK3 });
-            console.log(`Relaying message from channelID4 to channels 1, 2, and 3.`);
             //targetWebhooks.push({ id: channelWHID5, token: channelWHTK5 });
         //} else if (message.channel.id === channelID5) {
             //mappings.channel5MessageId = message.id;
