@@ -5,7 +5,7 @@ const path = require('path');
 const db = new sqlite3.Database(path.resolve(__dirname, 'messages.db'));
 
 // Drop the table if it exists (for development purposes)
-db.run(`DROP TABLE IF EXISTS message_mappings`);
+// db.run(`DROP TABLE IF EXISTS message_mappings`);
 
 // Create the table again with the correct schema
 db.run(`CREATE TABLE IF NOT EXISTS message_mappings (
