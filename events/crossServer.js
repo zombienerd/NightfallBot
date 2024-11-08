@@ -96,6 +96,7 @@ module.exports = {
             targetWebhooks.push({ id: channelWHID1, token: channelWHTK1 });
             targetWebhooks.push({ id: channelWHID2, token: channelWHTK2 });
             targetWebhooks.push({ id: channelWHID3, token: channelWHTK3 });
+            console.log(`Relaying message from channelID4 to channels 1, 2, and 3.`);
             //targetWebhooks.push({ id: channelWHID5, token: channelWHTK5 });
         //} else if (message.channel.id === channelID5) {
             //mappings.channel5MessageId = message.id;
@@ -158,17 +159,24 @@ module.exports = {
 
             const relayedMessage = await webhookClient.send(messageOptions);
 
-            // Update the mapping with the relayed message IDs
-            if (webhookData.id === channelWHID1) mappings.channel1MessageId = relayedMessage.id;
-            if (webhookData.id === channelWHID2) mappings.channel2MessageId = relayedMessage.id;
-            if (webhookData.id === channelWHID3) mappings.channel3MessageId = relayedMessage.id;
-            if (webhookData.id === channelWHID4) mappings.channel4MessageId = relayedMessage.id;
-            //if (webhookData.id === channelWHID5) mappings.channel5MessageId = relayedMessage.id;
-            if (webhookData.id === channelWHID6) mappings.channel6MessageId = relayedMessage.id;
-            if (webhookData.id === channelWHID7) mappings.channel7MessageId = relayedMessage.id;
-            if (webhookData.id === channelWHID8) mappings.channel8MessageId = relayedMessage.id;
-            if (webhookData.id === channelWHID9) mappings.channel9MessageId = relayedMessage.id;
-            //if (webhookData.id === channelWHID10) mappings.channel10MessageId = relayedMessage.id;
+            try {
+                const relayedMessage = await webhookClient.send(messageOptions);
+                // Log success for debugging
+                console.log(`Message relayed to target channel with ID: ${webhookData.id}`);
+                
+                // Update the mapping with the relayed message IDs
+                if (webhookData.id === channelWHID1) mappings.channel1MessageId = relayedMessage.id;
+                if (webhookData.id === channelWHID2) mappings.channel2MessageId = relayedMessage.id;
+                if (webhookData.id === channelWHID3) mappings.channel3MessageId = relayedMessage.id;
+                if (webhookData.id === channelWHID4) mappings.channel4MessageId = relayedMessage.id;
+                if (webhookData.id === channelWHID6) mappings.channel6MessageId = relayedMessage.id;
+                if (webhookData.id === channelWHID7) mappings.channel7MessageId = relayedMessage.id;
+                if (webhookData.id === channelWHID8) mappings.channel8MessageId = relayedMessage.id;
+                if (webhookData.id === channelWHID9) mappings.channel9MessageId = relayedMessage.id;
+            } catch (error) {
+                console.error(`Failed to send message to channel with ID: ${webhookData.id} - ${error.message}`);
+            }
+        
         }
 
         // Save original and relayed message IDs to the database
