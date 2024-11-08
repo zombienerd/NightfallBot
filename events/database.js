@@ -27,7 +27,7 @@ const addMessageMapping = (sourceMessageId, mappings) => {
         db.run(
             `INSERT OR REPLACE INTO message_mappings 
             (sourceMessageId, channel1MessageId, channel2MessageId, channel3MessageId, channel4MessageId, channel6MessageId, channel7MessageId, channel8MessageId, channel9MessageId) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 sourceMessageId, 
                 mappings.channel1MessageId, 
