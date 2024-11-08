@@ -4,12 +4,18 @@ const path = require('path');
 // Open the SQLite database (in-memory for temporary data)
 const db = new sqlite3.Database(path.resolve(__dirname, 'messages.db'));
 
-// Create table for message mappings if it doesn't exist
+// Drop the table if it exists (for development purposes)
+// db.run(`DROP TABLE IF EXISTS message_mappings`);
+
+// Create the table again with the correct schema
 db.run(`CREATE TABLE IF NOT EXISTS message_mappings (
     sourceMessageId TEXT PRIMARY KEY,
-    server1MessageId TEXT,
-    server2MessageId TEXT,
-    server3MessageId TEXT,
+    channel1MessageId TEXT,
+    channel2MessageId TEXT,
+    channel3MessageId TEXT,
+    channel6MessageId TEXT,
+    channel7MessageId TEXT,
+    channel8MessageId TEXT,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
 
@@ -17,9 +23,18 @@ db.run(`CREATE TABLE IF NOT EXISTS message_mappings (
 const addMessageMapping = (sourceMessageId, mappings) => {
     return new Promise((resolve, reject) => {
         db.run(
-            `INSERT OR REPLACE INTO message_mappings (sourceMessageId, server1MessageId, server2MessageId, server3MessageId)
-             VALUES (?, ?, ?, ?)`,
-            [sourceMessageId, mappings.server1MessageId, mappings.server2MessageId, mappings.server3MessageId],
+            `INSERT OR REPLACE INTO message_mappings 
+            (sourceMessageId, channel1MessageId, channel2MessageId, channel3MessageId, channel6MessageId, channel7MessageId, channel8MessageId) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [
+                sourceMessageId, 
+                mappings.channel1MessageId, 
+                mappings.channel2MessageId, 
+                mappings.channel3MessageId, 
+                mappings.channel6MessageId, 
+                mappings.channel7MessageId, 
+                mappings.channel8MessageId
+            ],
             function(err) {
                 if (err) reject(err);
                 else resolve();
@@ -28,17 +43,29 @@ const addMessageMapping = (sourceMessageId, mappings) => {
     });
 };
 
+
 // Function to get a message mapping by sourceMessageId
 const getMessageMapping = (sourceMessageId) => {
     return new Promise((resolve, reject) => {
         db.get(
-            `SELECT server1MessageId, server2MessageId, server3MessageId FROM message_mappings WHERE sourceMessageId = ?`,
+            `SELECT channel1MessageId, channel2MessageId, channel3MessageId, channel6MessageId, channel7MessageId, channel8MessageId 
+             FROM message_mappings WHERE sourceMessageId = ?`,
             [sourceMessageId],
             (err, row) => {
                 if (err) reject(err);
                 else resolve(row);
             }
         );
+    });
+};
+
+// Function to get all message mappings
+const getAllMappings = () => {
+    return new Promise((resolve, reject) => {
+        db.all("SELECT * FROM message_mappings", (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows);
+        });
     });
 };
 
@@ -51,4 +78,4 @@ const deleteOldMappings = () => {
 setInterval(deleteOldMappings, 60 * 60 * 1000);
 
 // Export the functions
-module.exports = { addMessageMapping, getMessageMapping };
+module.exports = { addMessageMapping, getMessageMapping, getAllMappings };
