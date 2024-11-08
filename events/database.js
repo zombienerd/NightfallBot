@@ -52,7 +52,7 @@ const addMessageMapping = (sourceMessageId, mappings) => {
 const getMessageMapping = (sourceMessageId) => {
     return new Promise((resolve, reject) => {
         db.get(
-            `SELECT channel1MessageId, channel2MessageId, channel3MessageId, channel6MessageId, channel7MessageId, channel8MessageId 
+            `SELECT channel1MessageId, channel2MessageId, channel3MessageId, channel4MessageId, channel6MessageId, channel7MessageId, channel8MessageId, channel9MessageId 
              FROM message_mappings WHERE sourceMessageId = ?`,
             [sourceMessageId],
             (err, row) => {
