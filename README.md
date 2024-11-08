@@ -2,9 +2,9 @@ Welcome to NightfallBot
 
 A discord bot for cross-server communications.
 
-Created with Node.js and Discord.js for the Nightfall Alliance
+Created with Node.js and Discord.js for the Nightfall Alliance (A Star Citizen Alliance).  Uses webhooks to "appear" as the person from the other server (with APP tag). Base reactions and reactions from servers the bot is on are transferred.  Reply text is sent, but it is not marked as a reply, just plain text.  I want to implent reply handling someday.
 
-Work in progress.  Don't expect much, I'm an unskilled monkey slapping a typewriter.
+Work in progress.  Don't expect much, I'm an unskilled monkey slapping a typewriter.  I made this for my org and alliance, not "for everyone". I offer the code freely as a base to anyone who thinks it'll work for them. BSD-3-clause license means you can do whatever you want with it, just keep the license attached.  If you can make it work for your situation, please feel free, you do so with my blessings and cheers. 
 
 Install node.js
 Install discord.js
