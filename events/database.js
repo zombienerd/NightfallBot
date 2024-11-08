@@ -13,9 +13,11 @@ db.run(`CREATE TABLE IF NOT EXISTS message_mappings (
     channel1MessageId TEXT,
     channel2MessageId TEXT,
     channel3MessageId TEXT,
+    channel4MessageId TEXT,
     channel6MessageId TEXT,
     channel7MessageId TEXT,
     channel8MessageId TEXT,
+    channel9MessageId TEXT,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
 
@@ -24,16 +26,18 @@ const addMessageMapping = (sourceMessageId, mappings) => {
     return new Promise((resolve, reject) => {
         db.run(
             `INSERT OR REPLACE INTO message_mappings 
-            (sourceMessageId, channel1MessageId, channel2MessageId, channel3MessageId, channel6MessageId, channel7MessageId, channel8MessageId) 
+            (sourceMessageId, channel1MessageId, channel2MessageId, channel3MessageId, channel4MessageId, channel6MessageId, channel7MessageId, channel8MessageId, channel9MessageId) 
             VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [
                 sourceMessageId, 
                 mappings.channel1MessageId, 
                 mappings.channel2MessageId, 
                 mappings.channel3MessageId, 
+                mappings.channel4MessageId,
                 mappings.channel6MessageId, 
                 mappings.channel7MessageId, 
-                mappings.channel8MessageId
+                mappings.channel8MessageId,
+                mappings.channel9MessageId
             ],
             function(err) {
                 if (err) reject(err);
