@@ -40,7 +40,7 @@ const {
 
 const serverAcronyms = {
     [serverID1]: "[NGI]",
-    [serverID2]: "[VIRT]",
+    [serverID2]: "[VGAL]",
     [serverID3]: "[12BG]",
     [serverID4]: "[NFIA]",
  //   [serverID5]: "[FEX]"
