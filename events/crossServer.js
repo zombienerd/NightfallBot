@@ -122,11 +122,12 @@ module.exports = {
             const messageOptions = {
                 username: webhookUsername,
                 avatarURL: avatarURL,
-                content: message.content || (stickerURL ? `[Sticker](${stickerURL})` : undefined),
-                files: [
-                    ...message.attachments.map(att => att.url),
-                    ...(stickerURL ? [stickerURL] : [])
-                ],
+                content: message.content || undefined,
+                files: message.attachments.size > 0 
+                    ? message.attachments.map(att => att.url) 
+                    : message.stickers.size > 0 
+                        ? message.stickers.map(sticker => sticker.url)
+                        : undefined,
                 embeds: message.embeds.length > 0 ? message.embeds.map(embed => ({
                     title: embed.title,
                     description: embed.description,
