@@ -49,7 +49,8 @@ const serverAcronyms = {
 module.exports = {
     name: 'messageCreate',
     async execute(message) {
-       
+        // Ignore system messages, including pins
+        if (message.system) return;
         // Check if the message is in a designated source channel
         if (![channelID1, channelID2, channelID3, channelID4, channelID6, channelID7, channelID8, channelID9].includes(message.channel.id)) return;
         if (!message.member) return;
